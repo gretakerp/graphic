@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <pattern id="Triangle" width="10" height="10"
+        patternUnits="userSpaceOnUse">
+      <polygon points="4,0 3,4 6,7 9,4 8,0"/>
+  </pattern>
+  </defs>
+
+  <ellipse transform="matrix(1, 0, 0, 1, -285, -9)" cx="489" cy="400" rx="26" ry="26" style="stroke: rgb(0, 0, 0);" fill="url(#Triangle)">
+    <animate id="spyris" attributeName="cy" from="400" to="200" dur="2s"/>
+  </ellipse>
+
+
+
+  <path d="M 539 161 L 539 161 Z" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M 539 161 L 539 161 Z" to="M 539 161 L 539 161 Z" dur="2s"/>
+  </path>
+  <path d="M -81 229 L -81 229 Z" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M -81 229 L -81 229 Z" to="M -81 229 L -81 229 Z" dur="2s"/>
+  </path>
+  <path d="M 118 210 Z" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 5;">
+    <animate id="remas" attributeName="d" from="M 118 210 Z" to="M 118 210 Z" dur="2s"/>
+  </path>
+
+  <path d="M 108 227 L 108 134 L 237 134 L 237 226" style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 5;">
+    <animate id="remas" attributeName="d" from="M 108 227 L 108 134 L 237 134 L 237 226" to="M 8 227 L 8 134 L 137 134 L 137 226" dur="2s"/>
+  </path>
+
+  <path d="M 540 272 L 540 272 Z" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M 540 272 L 540 272 Z" to="M 540 272 L 540 272 Z" dur="2s"/>
+  </path>
+  <path d="M 109 136 L 130 157 L 211 157 L 236 136" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M 109 136 L 130 157 L 211 157 L 236 136" to="M 109 136 L 130 157 L 211 157 L 236 136" dur="2s"/>
+  </path>
+  <path d="M 130 157 L 130 202 L 211 202 L 211 157" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M 130 157 L 130 202 L 211 202 L 211 157" to="M 130 157 L 130 202 L 211 202 L 211 157" dur="2s"/>
+  </path>
+  <path d="M 130 201 L 108 225" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M 130 201 L 108 225" to="M 130 201 L 108 225" dur="2s"/>
+  </path>
+  <path d="M 211 201 L 236 225" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M 211 201 L 236 225" to="M 211 201 L 236 225" dur="2s"/>
+  </path>
+  <path d="M -162 188 L -162 188 Z" style="fill: none; stroke: black;">
+    <animate id="remas" attributeName="d" from="M -162 188 L -162 188 Z" to="M -162 188 L -162 188 Z" dur="2s"/>
+  </path>
+
+</svg>

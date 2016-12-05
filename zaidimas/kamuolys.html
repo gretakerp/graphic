@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+<script>
+
+var refreshIntervalId = setInterval(draw, 40);
+//clearInterval(refreshIntervalId);
+function startGame() {
+
+    myGameArea.start();
+    setInterval(draw,40);
+    myGamePiece = new component(0, 0, "red", 10, 120);
+
+}
+
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    context = myGameArea.context;
+    context.fillStyle = color;
+    context.fillRect(this.x, this.y, this.width, this.height);
+}
+
+var myGameArea = {
+    canvas: document.createElement("canvas"),
+    start: function(){
+        this.canvas.width = 1000;
+        this.canvas.height = 500;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        window.addEventListener('keydown', function (e) {
+            myGameArea.key = e.keyCode;
+        })
+        window.addEventListener('keyup', function (e) {
+            myGameArea.key = false;
+        })
+    }
+}
+
+var context;
+var x=500;
+var y=250;
+var dx=4*kryptis;
+var dy=6;
+var kairesX=50;
+var kairesY=280;
+var desinesX=950;
+var desinesY=280;
+var scoreK=0;
+var scoreD=0;
+var kryptis=1;
+
+
+function setXY(){
+  x=500;
+  y=250;
+  dx=4*kryptis;
+  dy=6;
+}
+
+
+function draw()
+{
+  context.clearRect(0,0, 1000,500);
+
+
+  //skraidantis kamuoliukas
+  context.beginPath();
+  context.fillStyle="#000000";
+  context.arc(x,y,20,0,Math.PI*2,true);
+  context.closePath();
+  context.fill();
+if( x<40 || x>960)
+  dx=-dx;
+if( y<40 || y>460)
+  dy=-dy;
+if(((kairesX-x<50 && kairesX-x>0) || (x-kairesX<50 && x-kairesX>0)) && ((kairesY-y<50 && kairesY-y>0) || (x- kairesY<50 && x- kairesY>0))){
+  dx=-dx;
+  dy=-dy;
+}
+if(((desinesX-x<50 && desinesX-x>0) || (x-desinesX<50 && x-desinesX>0)) && ((desinesY-y<50 && desinesY-y>0) || (x- desinesY<50 && x- desinesY>0))){
+  dx=-dx;
+  dy=-dy;
+}
+if((x<41 && y>149 && y<351)){
+  dx=0;
+  dy=0;
+  scoreD=scoreD+1;
+  x=41;
+  kryptis=-kryptis;
+}
+if((x>959 && y>149 && y<351)){
+  dx=0;
+  dy=0;
+  scoreK=scoreK+1;
+  x=959;
+  kryptis=-kryptis;
+}
+  dy=dy+1;
+  dx=dx-1;
+  if(dx<1)
+    dx=10;
+  if(dy>10)
+    dy=1;
+
+x+=dx;
+y+=dy;
+//SCORE
+context.font = "30px Arial";
+context.fillText(scoreK,450,50);
+context.fillText(scoreD,540,50);
+//kairiu vartu saugas
+  context.beginPath();
+  context.fillStyle="#ff0000";
+  context.arc(kairesX,kairesY,20,0,Math.PI*2,true);
+  context.closePath();
+  context.fill();
+
+//desniu vartu saugas
+  context.beginPath();
+  context.fillStyle="#0000ff";
+  context.arc(desinesX,desinesY,20,0,Math.PI*2,true);
+  context.closePath();
+  context.fill();
+
+//vidurio linija
+  context.beginPath();
+  context.moveTo(500, 20);
+  context.lineTo(500, 480);
+  //vartai1
+  context.moveTo(0, 150);
+  context.lineTo(20, 150);
+  context.moveTo(0, 350);
+  context.lineTo(20, 350);
+  //sienos
+  context.lineTo(20, 480);
+  context.lineTo(980, 480);
+  context.lineTo(980, 350);
+  //vartai2
+  context.lineTo(1000, 350);
+  context.moveTo(1000, 150);
+  context.lineTo(980, 150);
+  context.lineTo(980, 150);
+  //sienos
+  context.lineTo(980, 20);
+  context.lineTo(20, 20);
+  context.lineTo(20, 150);
+  context.stroke();
+  context.closePath();
+  if (myGameArea.key && myGameArea.key == 65) {kairesX = kairesX - 4; }
+    if (myGameArea.key && myGameArea.key == 68) {kairesX = kairesX+ 4; }
+    if (myGameArea.key && myGameArea.key == 87) {kairesY = kairesY -4; }
+    if (myGameArea.key && myGameArea.key == 83) {kairesY = kairesY+ 4; }
+
+      if (myGameArea.key && myGameArea.key == 37) {desinesX = desinesX - 4; }
+    if (myGameArea.key && myGameArea.key == 39) {desinesX = desinesX+ 4; }
+    if (myGameArea.key && myGameArea.key == 38) {desinesY = desinesY -4; }
+    if (myGameArea.key && myGameArea.key == 40) {desinesY = desinesY+ 4; }
+}
+
+</script>
+<button type="button"  onclick="javascript:startGame();javascript:setXY();">
+       START GAME
+</button>
+<p>Blue controllers: up, down, left, right</p>
+<p>Red controllers: W A S D</p>
+</body>
+</html>

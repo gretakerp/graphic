@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+canvas {
+    border: 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+<script>
+
+
+function startGameEasy() {
+    myGameArea.start();
+
+    myGamePiece = new component(30, 30, "red", 10, 120);
+    setInterval(draw,40);
+}
+function startGameStandard() {
+    myGameArea.start();
+    myGamePiece = new component(30, 30, "red", 10, 120);
+    setInterval(draw,20);
+}
+function startGameHard() {
+    myGameArea.start();
+    myGamePiece = new component(30, 30, "red", 10, 120);
+    setInterval(draw,5);
+}
+
+function component(width, height, color, x, y) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    context = myGameArea.context;
+    context.fillStyle = color;
+    context.fillRect(this.x, this.y, this.width, this.height);
+}
+
+var myGameArea = {
+    canvas: document.createElement("canvas"),
+    start: function(){
+        this.canvas.width = 1000;
+        this.canvas.height = 500;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        window.addEventListener('keydown', function (e) {
+            myGameArea.key = e.keyCode;
+        })
+        window.addEventListener('keyup', function (e) {
+            myGameArea.key = false;
+        })
+    }
+}
+
+var context;
+var x=100;
+var y=200;
+var dx=5;
+var dy=5;
+var kairesX=50;
+var kairesY=280;
+var desinesX=950;
+var desinesY=280;
+
+function draw()
+{
+  context.clearRect(0,0, 1000,500);
+
+  //skraidantis kamuoliukas
+  context.beginPath();
+  context.fillStyle="#000000";
+  context.arc(x,y,20,0,Math.PI*2,true);
+  context.closePath();
+  context.fill();
+if( x<40 || x>960) dx=-dx;
+if( y<40 || y>460) dy=-dy;
+x+=dx;
+y+=dy;
+//kairiu vartu saugas
+  context.beginPath();
+  context.fillStyle="#ff0000";
+  context.arc(kairesX,kairesY,20,0,Math.PI*2,true);
+  context.closePath();
+  context.fill();
+
+//desniu vartu saugas
+  context.beginPath();
+  context.fillStyle="#0000ff";
+  context.arc(desinesX,desinesY,20,0,Math.PI*2,true);
+  context.closePath();
+  context.fill();
+
+//vidurio linija
+  context.beginPath();
+  context.moveTo(500, 20);
+  context.lineTo(500, 480);
+  //vartai1
+  context.moveTo(0, 180);
+  context.lineTo(20, 180);
+  context.moveTo(0, 320);
+  context.lineTo(20, 320);
+  //sienos
+  context.lineTo(20, 480);
+  context.lineTo(980, 480);
+  context.lineTo(980, 320);
+  //vartai2
+  context.lineTo(1000, 320);
+  context.moveTo(1000, 180);
+  context.lineTo(980, 180);
+  context.lineTo(980, 180);
+  //sienos
+  context.lineTo(980, 20);
+  context.lineTo(20, 20);
+  context.lineTo(20, 180);
+  context.stroke();
+  context.closePath();
+}
+function movement() {
+    if (myGameArea.key && myGameArea.key == 37) {kairesX = -1; }
+    if (myGameArea.key && myGameArea.key == 39) {kairesX = 1; }
+    if (myGameArea.key && myGameArea.key == 38) {kairesY = -1; }
+    if (myGameArea.key && myGameArea.key == 40) {kairesY = 1; }
+    myGamePiece.newPos();
+    myGamePiece.update();
+}
+</script>
+<p>Choose difficulty:</p>
+<button type="button"  onclick="javascript:startGameEasy()">
+       Easy
+</button>
+<button type="button"  onclick="javascript:startGameStandard()">
+       Standard
+</button>
+<button type="button"  onclick="javascript:startGameHard()">
+       Hard
+</button>
+</body>
+</html>
